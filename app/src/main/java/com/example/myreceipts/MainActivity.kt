@@ -3,7 +3,8 @@ package com.example.myreceipts
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myrecipes.R
+import br.com.myrecipes.R
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
