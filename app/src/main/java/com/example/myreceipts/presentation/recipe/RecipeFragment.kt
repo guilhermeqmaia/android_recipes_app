@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import br.com.myrecipes.databinding.FragmentRecipeBinding
 import com.example.myreceipts.presentation.recipe.adapter.RecipeAdapter
 
@@ -12,6 +13,9 @@ class RecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentRecipeBinding
     private val adapter by lazy { RecipeAdapter() }
+    private val viewModel : RecipeViewModel by viewModels {
+        RecipeViewModel.Factory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

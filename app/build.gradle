@@ -49,10 +49,10 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:${ext.room_version}"
+    implementation "androidx.room:room-ktx:${ext.room_version}"
     kapt "androidx.room:room-compiler:${ext.room_version}"
 
     //ViewModel
-    implementation "androidx.room:room-ktx:${ext.room_version}"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${ext.lifecycle_version}"
 
     testImplementation 'junit:junit:4.13.2'
