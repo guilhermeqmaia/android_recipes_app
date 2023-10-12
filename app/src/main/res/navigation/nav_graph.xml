@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.myrecipes.presentation.recipe.RecipeFragment"
+        android:name="br.com.myrecipes.presentation.recipe.RecipeFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_recipe">
 
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.example.myrecipes.presentation.detail.DetailFragment"
+        android:name="br.com.myrecipes.presentation.detail.DetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_detail">
         <action
