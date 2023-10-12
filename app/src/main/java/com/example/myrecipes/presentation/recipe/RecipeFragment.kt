@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import br.com.myrecipes.R
 import br.com.myrecipes.databinding.FragmentRecipeBinding
+import com.example.myrecipes.presentation.dialog.DialogEditTextFragment
 import com.example.myrecipes.presentation.recipe.adapter.RecipeAdapter
 
 class RecipeFragment : Fragment() {
@@ -34,7 +36,7 @@ class RecipeFragment : Fragment() {
 
     private fun setupListeners() {
         binding.fabRecipe.setOnClickListener {
-            //@TODO SHOW DIALOG
+            showDialog()
         }
     }
 
@@ -69,6 +71,18 @@ class RecipeFragment : Fragment() {
                     ).show()
                 }
             }
+        }
+    }
+
+    private fun showDialog() {
+        DialogEditTextFragment.show(
+            title = getString(R.string.recipe_dialog_title),
+            placeholder = getString(R.string.recipe_dialog_placeholder),
+            fragmentManager = parentFragmentManager,
+        )
+        setFragmentResultListener(DialogEditTextFragment.FRAGMENT_RESULT) { requestKey: String, bundle: Bundle ->  
+            val recipeName = bundle.getString(DialogEditTextFragment.EDIT_TEXT_VALUE) ?: ""
+            viewModel.insertRecipe(recipeName)
         }
     }
 }
