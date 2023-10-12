@@ -19,6 +19,18 @@ class ItemListAdapter : ListAdapter<ItemListModel, ItemListAdapter.ViewHolder>(D
         return ViewHolder(binding)
     }
 
+    fun addItem(newData: ItemListModel) {
+        val newList = mutableListOf<ItemListModel>(*currentList.toTypedArray(), newData)
+        submitList(newList)
+    }
+
+    private fun removeItem(item: ItemListModel) {
+        val newList = mutableListOf<ItemListModel>()
+        newList.addAll(currentList)
+        newList.remove(item)
+        submitList(newList)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -34,6 +46,7 @@ class ItemListAdapter : ListAdapter<ItemListModel, ItemListAdapter.ViewHolder>(D
             }
             btnRemove.setOnClickListener {
                 remove(item)
+                removeItem(item)
             }
         }
     }

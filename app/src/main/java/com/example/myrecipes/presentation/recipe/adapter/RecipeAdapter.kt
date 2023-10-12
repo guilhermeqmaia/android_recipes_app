@@ -25,6 +25,9 @@ class RecipeAdapter : ListAdapter<RecipeModel, RecipeAdapter.ViewHolder>(DiffCal
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RecipeModel) {
+            binding.root.setOnClickListener{
+                click(item)
+            }
             binding.tvTitle.text = item.name
         }
 

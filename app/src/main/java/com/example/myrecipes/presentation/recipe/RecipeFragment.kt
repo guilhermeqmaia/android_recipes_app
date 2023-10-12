@@ -1,6 +1,7 @@
 package com.example.myrecipes.presentation.recipe
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import br.com.myrecipes.R
 import br.com.myrecipes.databinding.FragmentRecipeBinding
 import com.example.myrecipes.presentation.dialog.DialogEditTextFragment
 import com.example.myrecipes.presentation.recipe.adapter.RecipeAdapter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class RecipeFragment : Fragment() {
 
@@ -38,19 +47,35 @@ class RecipeFragment : Fragment() {
         binding.fabRecipe.setOnClickListener {
             showDialog()
         }
+
+        adapter.click = { recipeItem ->
+            val action = RecipeFragmentDirections.goToDetail(
+                recipeItem.id
+            )
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupAdapter() {
         binding.rvRecipes.adapter = adapter
     }
 
+    private fun <T> Flow<T>.observe(owner: LifecycleOwner, observe: (T) -> Unit) {
+        owner.lifecycleScope.launch {
+            owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                this@observe.collect(observe)
+            }
+        }
+    }
+
     private fun observeStates() {
+
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                RecipeState.Loading -> {
+                RecipesState.Loading -> {
                     binding.pbLoading.isVisible = true
                 }
-                RecipeState.Empty -> {
+                RecipesState.Empty -> {
                     binding.pbLoading.isVisible = false
                     Toast.makeText(
                         requireContext(),
@@ -58,11 +83,11 @@ class RecipeFragment : Fragment() {
                         Toast.LENGTH_LONG,
                     ).show()
                 }
-                is RecipeState.Success -> {
+                is RecipesState.Success -> {
                     binding.pbLoading.isVisible = false
                     adapter.submitList(state.recipes)
                 }
-                is RecipeState.Error -> {
+                is RecipesState.Error -> {
                    binding.pbLoading.isVisible = false
                     Toast.makeText(
                         requireContext(),
@@ -85,4 +110,6 @@ class RecipeFragment : Fragment() {
             viewModel.insertRecipe(recipeName)
         }
     }
+
+
 }

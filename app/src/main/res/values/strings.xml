@@ -7,4 +7,9 @@
     <string name="action_settings">Settings</string>
     <string name="recipe_dialog_title">Nova Receita</string>
     <string name="recipe_dialog_placeholder">Nome da Receita</string>
+    <string name="label_prepare_mode">Modo de Preparo</string>
+    <string name="label_ingredients">Ingredientes</string>
+    <string name="label_new_prepare_mode">Modo de Preparo\n</string>
+    <string name="label_item_description">Descrição</string>
+    <string name="label_new_ingredient">Ingrediente</string>
 </resources>
