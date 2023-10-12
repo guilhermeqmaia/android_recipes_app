@@ -10,15 +10,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.MyRecipes"
         tools:targetApi="31">
         <activity
-            android:name="com.example.myreceipts.MainActivity"
-            android:theme="@style/Theme.AppCompat"
+            android:name="com.example.myrecipes.presentation.MainActivity"
+            android:theme="@style/Theme.MyRecipes.NoActionBar"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
