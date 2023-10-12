@@ -13,11 +13,13 @@ import com.example.myrecipes.presentation.model.ItemListModel
 fun RecipeModel.toEntity() = RecipeEntity(
     id = id,
     name = name,
+    prepareTime = prepareTime,
 )
 
 fun RecipeEntity.toModel() = RecipeModel(
     id = id,
     name = name,
+    prepareTime = prepareTime,
 )
 
 fun FullRecipeEntity.toModel() = FullRecipeModel(

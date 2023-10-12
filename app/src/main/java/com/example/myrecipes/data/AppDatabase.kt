@@ -9,7 +9,7 @@ import com.example.myrecipes.data.entity.RecipeEntity
 
 @Database(
     entities = [RecipeEntity::class, IngredientEntity::class, PrepareModeEntity::class],
-    version = 1,
+    version = 2,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
